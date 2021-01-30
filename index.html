@@ -1,19 +1,42 @@
 <!DOCTYPE html>
 <html>
+  <link rel="stylesheet" href="renderer.css">
   <head>
     <meta charset="UTF-8">
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval'; img-src 'self' data: blob:">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval'; img-src 'self' data: blob:">
     <title>Hello World!</title>
   </head>
   <body>
-    <h1>Hello World!</h1>
-    We are using Node.js <span id="node-version"></span>,
-    Chromium <span id="chrome-version"></span>,
-    and Electron <span id="electron-version"></span>.
+    <div>
+      <button id="openFolderButton">Click me to open a folder</button>
+      <label>Filters</label>
+      <input type="text" id="filter-input">
+      <button id="addFilter">Add the Filter</button>
+    </div>
+    <div>
+      <label>Open Folders: </label>
+      <label id="openFoldersLabel"></label>
+    </div>
+    <div>
+      <label>Applied Filters: </label>
+      <label id="appliedFiltersLabel"></label>
+    </div>
+    <div id="imageGrid" class="imageGrid">
+    </div>
 
-    <!-- You can also require other files to run in this process -->
-    <script src="./renderer.js"></script>
+    <template id="imagTileTemplate">
+      <div id="previewTile" class="dropdown">
+        <img id="imageTile" widht="620" height="480"></img>
+        <div class="dropdown-content">
+          <label>Add new tag:</label>
+          <input type="text" id="inputNewTag">
+          <label id="imageTileLabels"></label>
+        </div>
+      </div>
+    </template>
+
   </body>
+  <script src="./renderer.js"></script>
 </html>
